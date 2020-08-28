@@ -1,24 +1,80 @@
+var helicopterIMG, helicopterSprite, packageSprite,packageIMG;
+var packageBody,ground, box1,box2,box3;
 const Engine = Matter.Engine;
-const World= Matter.World;
+const World = Matter.World;
 const Bodies = Matter.Bodies;
+const Body = Matter.Body;
 
-var engine, world;
-var box1,box2,ground;
+var engine;
+var world;
 
-function setup(){
-    var canvas = createCanvas(400,400);
-    engine = Engine.create();
-    world = engine.world;
-
-    box1 = new Box(200,300,50,50);
-    box2 = new Box(230,100,50,50);
-    ground = new Ground(200,380,400,20)
+function preload()
+{
+	helicopterIMG=loadImage("helicopter.png")
+	packageIMG=loadImage("package.png")
 }
 
-function draw(){
-    background(0);
-    Engine.update(engine);
-    box1.display();
+function setup() {
+	createCanvas(800, 700);
+	rectMode(CENTER);
+	
+	engine = Engine.create();
+	world = engine.world;
+
+	packageSprite=createSprite(width/2, 80, 10,10);
+	packageSprite.addImage(packageIMG)
+	packageSprite.scale=0.2
+
+	helicopterSprite=createSprite(width/2, 80, 10,10);
+	helicopterSprite.addImage(helicopterIMG)
+	helicopterSprite.scale=0.6
+
+	//packageBody = Bodies.circle(width/2 , 200 , 5 , {restitution:0.5, isStatic:true});
+	//World.add(world, packageBody);
+
+	ground=new Ground(width/2, height-35, width,10);
+box1 = new Box(420,height-50, 70,10);
+box2 = new Box(460,height-80,10,50);
+box3 = new Box(380,height-80,10,50);
+	
+
+	packageBody=new Package(100,700,20);
+
+
+
+	//Create a Ground
+	
+
+	Engine.run(engine);
+  
+}
+
+
+function draw() {
+  rectMode(CENTER);
+  background(0);
+  
+
+  //packageSprite.x= packageBody.position.x 
+ //packageSprite.y= packageBody.position.y 
+ 
+  drawSprites();
+  packageBody.display();
   ground.display();
-  box2.display(); 
+  box1.display();
+  box2.display();
+  box3.display();
+
 }
+
+function keyPressed() {
+
+ if (keyCode === DOWN_ARROW) {
+	
+    // Look at the hints in the document and understand how to make the package body fall only on
+    Matter.Body.setStatic(packageBody,false);
+  }
+}
+
+
+
