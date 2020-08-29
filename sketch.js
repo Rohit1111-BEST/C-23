@@ -20,6 +20,10 @@ function setup() {
 	
 	engine = Engine.create();
 	world = engine.world;
+	
+	packageBody= new Package(width/2, 80,10);		
+	packageSprite.x = packageBody.body.position.x;
+	packageSprite.y= packageBody.body,position.y;
 
 	packageSprite=createSprite(width/2, 80, 10,10);
 	packageSprite.addImage(packageIMG)
@@ -38,7 +42,7 @@ box2 = new Box(460,height-80,10,50);
 box3 = new Box(380,height-80,10,50);
 	
 
-	packageBody=new Package(100,700,20);
+	//packageBody=new Package(100,700,20);
 
 
 
@@ -58,12 +62,13 @@ function draw() {
   //packageSprite.x= packageBody.position.x 
  //packageSprite.y= packageBody.position.y 
  
-  drawSprites();
   packageBody.display();
   ground.display();
   box1.display();
   box2.display();
   box3.display();
+  drawSprites();
+
 
 }
 
